@@ -11,6 +11,7 @@ const Contact = () => {
     <div className="min-h-screen">
       <Navigation />
       
+      
       {/* Hero */}
       <section className="pt-32 pb-16 bg-primary text-white">
         <div className="container mx-auto px-4 lg:px-8">
@@ -29,6 +30,7 @@ const Contact = () => {
           </motion.div>
         </div>
       </section>
+    
 
       {/* Contact Grid */}
       <section className="py-20 bg-secondary">
@@ -186,6 +188,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
+      
 
       <Footer />
     </div>
