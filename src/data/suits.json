@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Classic Navy Three-Piece",
+    "category": "Business",
+    "style": "Three-Piece",
+    "gender": "Male",
+    "image": "/src/assets/suit-navy.jpg",
+    "price": "From KES 45,000",
+    "description": "Timeless elegance for the modern professional. Crafted from premium 120s wool with peak lapels and double vent. Perfect for boardroom meetings and corporate events.",
+    "features": ["Peak lapels", "Double vent", "120s wool", "Functional buttonholes", "Hand-stitched details"],
+    "occasions": ["Business", "Formal Events", "Weddings"]
+  },
+  {
+    "id": "2",
+    "name": "Camel Double-Breasted",
+    "category": "Casual",
+    "style": "Double-Breasted",
+    "gender": "Male",
+    "image": "/src/assets/suit-camel.jpg",
+    "price": "From KES 52,000",
+    "description": "Bold statement piece for sophisticated occasions. Rich camel tone in luxurious cashmere blend. Six-button configuration with wide lapels for a commanding presence.",
+    "features": ["6-button configuration", "Wide peak lapels", "Cashmere blend", "Ticket pocket", "Working cuffs"],
+    "occasions": ["Smart Casual", "Garden Parties", "Gallery Openings"]
+  },
+  {
+    "id": "3",
+    "name": "White Dinner Tuxedo",
+    "category": "Wedding",
+    "style": "Tuxedo",
+    "gender": "Male",
+    "image": "/src/assets/tux-white.jpg",
+    "price": "From KES 65,000",
+    "description": "Perfect for your special day. Crisp white dinner jacket with satin shawl collar. Paired with black tuxedo trousers for a stunning contrast.",
+    "features": ["Satin shawl collar", "Contrast black trousers", "Satin covered buttons", "Silk pocket square included"],
+    "occasions": ["Weddings", "White-Tie Events", "Galas"]
+  },
+  {
+    "id": "4",
+    "name": "Midnight Velvet Tuxedo",
+    "category": "Evening",
+    "style": "Tuxedo",
+    "gender": "Male",
+    "image": "/src/assets/tux-velvet.jpg",
+    "price": "From KES 72,000",
+    "description": "Luxury evening wear with rich texture. Deep midnight blue velvet with grosgrain silk lapels. The ultimate statement for black-tie affairs.",
+    "features": ["Italian velvet", "Grosgrain silk lapels", "Satin side stripe", "Midnight blue tone"],
+    "occasions": ["Black-Tie Events", "Charity Galas", "Award Ceremonies"]
+  }
+]

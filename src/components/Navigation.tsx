@@ -19,15 +19,12 @@ const Navigation = () => {
 
   const menuItems = [
     { label: "Suits", path: "/suits" },
-    { label: "Tuxedos", path: "/suits?category=tuxedos" },
     { label: "Fabrics", path: "/fabrics" },
-    { label: "Why MaxJuma", path: "/why-maxjuma" },
-    { label: "Gallery", path: "/gallery" },
+    { label: "Lookbook", path: "/lookbook" },
     { label: "Book Fitting", path: "/book" },
-    { label: "Contact", path: "/contact" },
   ];
 
-  const whatsappUrl = "https://wa.me/254700000000";
+  const whatsappUrl = "https://wa.me/254748215758";
 
   return (
     <motion.nav

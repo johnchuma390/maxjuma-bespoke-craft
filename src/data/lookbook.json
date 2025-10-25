@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "image": "/src/assets/hero-suit.jpg",
+    "category": "Business",
+    "style": "Classic",
+    "gender": "Male",
+    "title": "Corporate Executive",
+    "description": "Custom navy three-piece for Nairobi CEO",
+    "tags": ["Navy", "Three-Piece", "Formal"],
+    "occasion": "Business Meeting"
+  },
+  {
+    "id": "2",
+    "image": "/src/assets/tux-white.jpg",
+    "category": "Wedding",
+    "style": "Tuxedo",
+    "gender": "Male",
+    "title": "Wedding Special",
+    "description": "Groom's white tuxedo, Karen ceremony",
+    "tags": ["White", "Tuxedo", "Wedding"],
+    "occasion": "Wedding"
+  },
+  {
+    "id": "3",
+    "image": "/src/assets/suit-camel.jpg",
+    "category": "Casual",
+    "style": "Double-Breasted",
+    "gender": "Male",
+    "title": "Smart Casual",
+    "description": "Double-breasted camel for gallery opening",
+    "tags": ["Camel", "Double-Breasted", "Smart Casual"],
+    "occasion": "Social Event"
+  },
+  {
+    "id": "4",
+    "image": "/src/assets/tux-velvet.jpg",
+    "category": "Evening",
+    "style": "Tuxedo",
+    "gender": "Male",
+    "title": "Gala Evening",
+    "description": "Velvet tuxedo for charity gala",
+    "tags": ["Velvet", "Tuxedo", "Evening"],
+    "occasion": "Gala"
+  },
+  {
+    "id": "5",
+    "image": "/src/assets/suit-navy.jpg",
+    "category": "Business",
+    "style": "Classic",
+    "gender": "Male",
+    "title": "Legal Professional",
+    "description": "Classic navy for senior advocate",
+    "tags": ["Navy", "Classic", "Professional"],
+    "occasion": "Court Appearance"
+  },
+  {
+    "id": "6",
+    "image": "/src/assets/artisan-hands.jpg",
+    "category": "Craftsmanship",
+    "style": "Detail",
+    "gender": "Unisex",
+    "title": "Artisan Detail",
+    "description": "Hand-stitched perfection",
+    "tags": ["Craftsmanship", "Detail", "Handmade"],
+    "occasion": "Showcase"
+  }
+]

@@ -79,7 +79,7 @@ const Hero = () => {
                 className="border-white text-white hover:bg-white hover:text-primary px-8 py-6 text-lg"
                 asChild
               >
-                <Link to="/why-maxjuma">Why MaxJuma</Link>
+                <Link to="/lookbook">View Lookbook</Link>
               </Button>
             </motion.div>
           </motion.div>

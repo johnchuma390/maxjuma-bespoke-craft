@@ -6,10 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Suits from "./pages/Suits";
 import Fabrics from "./pages/Fabrics";
-import WhyMaxJuma from "./pages/WhyMaxJuma";
-import Gallery from "./pages/Gallery";
-import Book from "./pages/Book";
-import Contact from "./pages/Contact";
+import Lookbook from "./pages/Lookbook";
+import BookContact from "./pages/BookContact";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,11 +23,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/suits" element={<Suits />} />
           <Route path="/fabrics" element={<Fabrics />} />
-          <Route path="/why-maxjuma" element={<WhyMaxJuma />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/book" element={<Book />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/lookbook" element={<Lookbook />} />
+          <Route path="/book" element={<BookContact />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

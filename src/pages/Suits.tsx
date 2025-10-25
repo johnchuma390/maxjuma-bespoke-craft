@@ -3,62 +3,20 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import suitNavy from "@/assets/suit-navy.jpg";
-import suitCamel from "@/assets/suit-camel.jpg";
-import tuxWhite from "@/assets/tux-white.jpg";
-import tuxVelvet from "@/assets/tux-velvet.jpg";
+import { useState, useEffect } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import suitsData from "@/data/suits.json";
 
 const Suits = () => {
-  const suits = [
-    {
-      id: 1,
-      name: "Classic Navy Three-Piece",
-      category: "Business",
-      image: suitNavy,
-      price: "From KES 45,000",
-      description: "Timeless elegance for the modern professional",
-    },
-    {
-      id: 2,
-      name: "Camel Double-Breasted",
-      category: "Casual",
-      image: suitCamel,
-      price: "From KES 52,000",
-      description: "Bold statement piece for sophisticated occasions",
-    },
-    {
-      id: 3,
-      name: "White Dinner Tuxedo",
-      category: "Wedding",
-      image: tuxWhite,
-      price: "From KES 65,000",
-      description: "Perfect for your special day",
-    },
-    {
-      id: 4,
-      name: "Midnight Velvet Tuxedo",
-      category: "Evening",
-      image: tuxVelvet,
-      price: "From KES 72,000",
-      description: "Luxury evening wear with rich texture",
-    },
-    {
-      id: 5,
-      name: "Charcoal Pinstripe",
-      category: "Business",
-      image: suitNavy,
-      price: "From KES 48,000",
-      description: "Executive presence with classic detailing",
-    },
-    {
-      id: 6,
-      name: "Light Grey Summer",
-      category: "Casual",
-      image: suitCamel,
-      price: "From KES 42,000",
-      description: "Breathable linen blend for warm weather",
-    },
-  ];
+  const [suits, setSuits] = useState(suitsData);
+
+  useEffect(() => {
+    const savedSuits = localStorage.getItem('maxjuma-suits');
+    if (savedSuits) {
+      setSuits(JSON.parse(savedSuits));
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -72,12 +30,11 @@ const Suits = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center space-y-6"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold">
-              Bespoke Suits & Tuxedos
+            <h1 className="text-5xl lg:text-7xl font-display font-bold tracking-wider">
+              BESPOKE SUITS & TUXEDOS
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Each piece is meticulously crafted to your exact measurements,
-              style preferences, and lifestyle needs
+            <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+              Each piece is meticulously crafted to your exact measurements, style preferences, and lifestyle needs. Hand-cut, hand-sewn, and made to last a lifetime.
             </p>
           </motion.div>
         </div>
@@ -93,35 +50,69 @@ const Suits = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
               >
-                <div className="relative aspect-[3/4] overflow-hidden">
-                  <img
-                    src={suit.image}
-                    alt={suit.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-accent text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {suit.category}
-                    </span>
+                <Card className="group overflow-hidden hover:shadow-2xl transition-shadow duration-300 h-full flex flex-col">
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <img
+                      src={suit.image}
+                      alt={suit.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 right-4 flex flex-col gap-2">
+                      <Badge className="bg-accent text-white">
+                        {suit.category}
+                      </Badge>
+                      <Badge variant="outline" className="bg-white/90 text-primary border-0">
+                        {suit.style}
+                      </Badge>
+                    </div>
                   </div>
-                </div>
-                <div className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-foreground">
-                    {suit.name}
-                  </h3>
-                  <p className="text-muted-foreground">{suit.description}</p>
-                  <p className="text-lg font-semibold text-accent">
-                    {suit.price}
-                  </p>
-                  <Button
-                    className="w-full bg-primary hover:bg-primary/90"
-                    asChild
-                  >
-                    <Link to="/book">Book Fitting</Link>
-                  </Button>
-                </div>
+                  <CardContent className="p-6 space-y-4 flex-1 flex flex-col">
+                    <div>
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
+                        {suit.name}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {suit.description}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h4 className="text-sm font-semibold text-foreground">Features:</h4>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        {suit.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-accent mr-2">✓</span>
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h4 className="text-sm font-semibold text-foreground">Perfect For:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {suit.occasions.map((occasion, idx) => (
+                          <Badge key={idx} variant="outline" className="text-xs">
+                            {occasion}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-border mt-auto">
+                      <p className="text-xl font-semibold text-accent mb-3">
+                        {suit.price}
+                      </p>
+                      <Button
+                        className="w-full bg-primary hover:bg-primary/90"
+                        asChild
+                      >
+                        <Link to="/book">Book Fitting</Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
@@ -147,7 +138,6 @@ const Suits = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary text-primary"
                 asChild
               >
                 <Link to="/fabrics">Browse Fabrics</Link>
