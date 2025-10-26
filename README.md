@@ -1,4 +1,13 @@
-# Welcome to your Lovable project
+# MaxJuma Bespoke Tailors Website
+
+Premium website for custom suits and bespoke tailoring in Nairobi.
+
+## 🔐 Admin Panel Access
+
+**URL**: `/admin`  
+**Default Password**: `maxjuma2025`
+
+The admin panel lets you manage all website content (suits, fabrics, lookbook, settings) without a backend.
 
 ## Project info
 

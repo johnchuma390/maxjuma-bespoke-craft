@@ -136,12 +136,21 @@ const Admin = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <Lock className="h-12 w-12 mx-auto mb-4 text-accent" />
-            <CardTitle className="text-3xl font-display">Admin Panel</CardTitle>
-            <p className="text-muted-foreground">Enter password to continue</p>
+      <div className="min-h-screen bg-gradient-to-br from-primary via-primary to-black flex items-center justify-center p-4">
+        <Card className="w-full max-w-md shadow-2xl">
+          <CardHeader className="text-center space-y-4">
+            <div className="mx-auto w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center">
+              <Lock className="h-10 w-10 text-accent" />
+            </div>
+            <CardTitle className="text-3xl font-display">MaxJuma Admin</CardTitle>
+            <p className="text-muted-foreground">
+              Secure access to website management
+            </p>
+            <div className="bg-muted/50 p-3 rounded-lg text-xs">
+              <p className="font-semibold mb-1">Access Information:</p>
+              <p className="text-muted-foreground">URL: /admin</p>
+              <p className="text-muted-foreground">Default Password: maxjuma2025</p>
+            </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">

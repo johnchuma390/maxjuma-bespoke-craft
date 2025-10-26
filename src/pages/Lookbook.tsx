@@ -26,7 +26,7 @@ const Lookbook = () => {
     let filtered = items;
 
     if (selectedCategory !== "All") {
-      filtered = filtered.filter(item => item.category === selectedCategory);
+      filtered = filtered.filter(item => item.event.includes(selectedCategory));
     }
     if (selectedStyle !== "All") {
       filtered = filtered.filter(item => item.style === selectedStyle);
@@ -38,7 +38,7 @@ const Lookbook = () => {
     setFilteredItems(filtered);
   }, [selectedCategory, selectedStyle, selectedGender, items]);
 
-  const categories = ["All", ...new Set(items.map(item => item.category))];
+  const categories = ["All", "Weddings", "Corporate", "Cultural", "Formal"];
   const styles = ["All", ...new Set(items.map(item => item.style))];
   const genders = ["All", ...new Set(items.map(item => item.gender))];
 
@@ -151,7 +151,7 @@ const Lookbook = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {filteredItems.map((item, index) => (
                 <motion.div
-                  key={item.id}
+                  key={index}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -171,15 +171,16 @@ const Lookbook = () => {
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white space-y-2">
                       <div className="flex flex-wrap gap-2 mb-2">
                         <span className="inline-block bg-accent px-3 py-1 rounded-full text-xs font-medium">
-                          {item.category}
+                          {item.gender}
                         </span>
                         <span className="inline-block bg-white/20 px-3 py-1 rounded-full text-xs font-medium">
-                          {item.style}
+                          {item.color}
                         </span>
                       </div>
                       <h3 className="text-xl font-bold">{item.title}</h3>
-                      <p className="text-white/90 text-sm">{item.description}</p>
-                      <p className="text-xs text-white/70">{item.occasion}</p>
+                      <p className="text-white/90 text-sm line-clamp-2">{item.description}</p>
+                      <p className="text-xs text-white/70">{item.event}</p>
+                      <p className="text-accent font-semibold text-sm mt-2">{item.priceRange}</p>
                     </div>
                   </div>
                 </motion.div>
