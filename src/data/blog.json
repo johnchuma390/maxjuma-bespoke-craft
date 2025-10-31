@@ -1,0 +1,35 @@
+[
+  {
+    "id": "atelier-diary",
+    "title": "Inside the Garden Chambers Atelier",
+    "slug": "garden-chambers-atelier-diary",
+    "author": "Max Juma",
+    "date": "2025-09-15",
+    "readTime": "5 min read",
+    "excerpt": "Step into our Nairobi studio and see how master tailors cut, hand-finish, and press every bespoke suit that leaves our doors.",
+    "tags": ["Atelier", "Craftsmanship", "Nairobi"],
+    "heroImage": "https://i.postimg.cc/KcQMmtKJ/image.png"
+  },
+  {
+    "id": "bespoke-wedding-style",
+    "title": "Bespoke Wedding Style for Kenyan Couples",
+    "slug": "bespoke-wedding-style-kenya",
+    "author": "Sarah Njoroge",
+    "date": "2025-08-02",
+    "readTime": "7 min read",
+    "excerpt": "From coastal ceremonies to city cathedrals, discover custom suit fabrics, lapel choices, and finishing touches that elevate the big day.",
+    "tags": ["Weddings", "Style Guide", "Fabrics"],
+    "heroImage": "https://i.postimg.cc/qRL1Gg13/image.png"
+  },
+  {
+    "id": "seasonal-fabrics",
+    "title": "Seasonal Fabrics Perfect for Nairobi Weather",
+    "slug": "seasonal-fabrics-nairobi",
+    "author": "Adrian Kamau",
+    "date": "2025-06-21",
+    "readTime": "6 min read",
+    "excerpt": "We break down breathable blends, luxurious wools, and bold African prints that keep you polished from April showers to December heat.",
+    "tags": ["Fabrics", "Climate", "Tailoring Tips"],
+    "heroImage": "https://i.postimg.cc/zvbW9W2S/image.png"
+  }
+]

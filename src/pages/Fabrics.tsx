@@ -48,10 +48,43 @@ const Fabrics = () => {
                         <span className="font-medium">{fabric.origin}</span><span>•</span><span>{fabric.weight}</span>
                       </div>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed">{fabric.description}</p>
+                    <div className="mt-6 space-y-4">
+                      <p className="text-sm text-muted-foreground">{fabric.description}</p>
+
+                      <div className="space-y-2">
+                        <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+                          Key Features
+                        </h4>
+                        <ul className="grid grid-cols-1 gap-2 text-sm text-muted-foreground sm:grid-cols-2">
+                          {fabric.features.map((feature) => (
+                            <li key={feature} className="flex items-center gap-2">
+                              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="space-y-2">
+                        <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+                          Best For
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {fabric.bestFor.map((useCase) => (
+                            <span
+                              key={useCase}
+                              className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-accent"
+                            >
+                              {useCase}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                     <div className="pt-4 border-t border-border">
-                      <p className="text-lg font-semibold text-accent mb-3">{fabric.priceRange}</p>
-                      <Button className="w-full bg-primary hover:bg-primary/90" asChild><Link to="/book">Select This Fabric</Link></Button>
+                      <Button className="w-full bg-primary hover:bg-primary/90" asChild>
+                        <Link to="/book">Select This Fabric</Link>
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>

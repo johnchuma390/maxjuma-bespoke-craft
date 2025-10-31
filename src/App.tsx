@@ -11,6 +11,7 @@ import About from "./pages/About";
 import BookContact from "./pages/BookContact";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import Blog from "./pages/Blog";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/suits" element={<Suits />} />
           <Route path="/fabrics" element={<Fabrics />} />
           <Route path="/lookbook" element={<Lookbook />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
           <Route path="/book" element={<BookContact />} />
           <Route path="/admin" element={<Admin />} />

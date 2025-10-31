@@ -1,210 +1,272 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MessageCircle, Scissors, ShoppingBag } from "lucide-react";
+import { Menu, X, PhoneCall, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const WhatsappIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 32 32"
+    className={className}
+    aria-hidden="true"
+    fill="currentColor"
+  >
+    <path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.4 2.1 7.7L1 31l7.4-1.5A15.3 15.3 0 0 0 16 31.5c8.6 0 15.5-7 15.5-15.5S24.6.5 16 .5Zm0 28.2c-2.6 0-5.1-.7-7.3-2l-.5-.3-4.4.9.9-4.3-.3-.6A12.7 12.7 0 0 1 3.3 16C3.3 8.7 8.7 3.3 16 3.3S28.7 8.7 28.7 16 23.3 28.7 16 28.7Zm7.3-9.7c-.4-.2-2.4-1.2-2.7-1.3-.4-.1-.7-.2-1 .2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1-2-2.4-2.3-2.8-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.2-3-.4-.9-.7-.7-1-.7l-.8-.1c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.3 0 2 1.4 3.9 1.6 4.1.2.3 2.9 4.3 6.9 6.1 4 1.7 4 1.2 4.8 1.1.7-.1 2.3-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5Z" />
+  </svg>
+);
+
+const highlightColor = "#F5D77B";
+const navBackground = "#12223A";
+
+const logoSrc = "https://i.postimg.cc/9fWHQBhs/Whats-App-Image-2025-10-31-at-21-41-21-f7b5400c.jpg";
+
 const Navigation = () => {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+
+  const whatsappNumber = "+254 748 215758";
+  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}`;
+
+  const menuItems = [
+    { label: "Our Suits", path: "/suits" },
+    { label: "Premium Fabrics", path: "/fabrics" },
+    { label: "Lookbook", path: "/lookbook" },
+    { label: "Blog", path: "/blog" },
+    { label: "About Us", path: "/about" },
+  ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const menuItems = [
-    { label: "Our Suits", path: "/suits", icon: ShoppingBag },
-    { label: "Premium Fabrics", path: "/fabrics", icon: Scissors },
-    { label: "Lookbook", path: "/lookbook", icon: null },
-    { label: "About Us", path: "/about", icon: null },
-    { label: "Book Fitting", path: "/book", icon: null },
-  ];
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+    document.body.style.overflow = "";
+  }, [isMobileMenuOpen]);
 
-  const whatsappUrl = "https://wa.me/254748215758";
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "glass-effect shadow-lg border-b border-border/50"
-          : "bg-gradient-to-b from-black/30 to-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-4 lg:px-12">
-        <div className="flex items-center justify-between h-24 lg:h-28">
-          {/* Logo - More Prominent */}
-          <Link to="/" className="z-50 group">
-            <motion.div
-              className="flex flex-col items-start"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 400 }}
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div className="hidden md:block bg-[#08111D] text-white">
+        <div className="container mx-auto flex items-center justify-between px-6 py-2 text-xs uppercase tracking-[0.35em]">
+          <div className="flex items-center gap-3 text-white/80">
+            <PhoneCall className="h-3.5 w-3.5" style={{ color: highlightColor }} />
+            <span>Garden Chambers · Opposite Jeevanjee Gardens</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <a href={`tel:${whatsappNumber}`} className="transition hover:text-[rgb(245,215,123)]">
+              {whatsappNumber}
+            </a>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 transition hover:text-[rgb(245,215,123)]"
             >
-              <h1
-                className={`text-3xl lg:text-4xl font-bold tracking-[0.2em] transition-all duration-300 ${
-                  isScrolled ? "text-primary" : "text-white drop-shadow-lg"
-                }`}
-              >
+              <WhatsappIcon className="h-3.5 w-3.5" />
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <motion.nav
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className={`border-b border-white/10 bg-[#12223A] text-white transition-colors duration-500 ${
+          isScrolled ? "shadow-xl" : "shadow-md"
+        }`}
+        style={{ backgroundColor: navBackground }}
+      >
+        <div className="container mx-auto flex items-center justify-between px-4 py-4 md:px-6 md:py-5">
+          <Link to="/" className="flex items-center gap-3">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 p-2 ring-2 ring-white/30">
+              <img
+                src={logoSrc}
+                alt="MaxJuma Tailors logo"
+                className="h-full w-full rounded-full object-cover"
+              />
+            </span>
+            <div className="flex flex-col">
+              <span className="text-xl md:text-2xl font-bold tracking-[0.3em] text-white">
                 MAXJUMA
-              </h1>
-              <p
-                className={`text-[10px] lg:text-xs tracking-[0.3em] font-light transition-all duration-300 ${
-                  isScrolled ? "text-accent" : "text-accent/90"
-                }`}
-              >
+              </span>
+              <span className="text-[10px] tracking-[0.45em]" style={{ color: highlightColor }}>
                 BESPOKE TAILORS
-              </p>
-            </motion.div>
+              </span>
+            </div>
           </Link>
 
-          {/* Desktop Menu - Enhanced */}
-          <div className="hidden lg:flex items-center space-x-2">
-            {menuItems.map((item, index) => (
-              <motion.div
-                key={item.path}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
+          <div className="hidden lg:flex items-center gap-1">
+            {menuItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
                 <Link
+                  key={item.path}
                   to={item.path}
-                  className="group relative"
+                  className={`relative rounded-full px-5 py-2 text-sm font-semibold transition ${
+                    isActive
+                      ? "text-[rgb(245,215,123)]"
+                      : "text-white/75 hover:text-[rgb(245,215,123)]"
+                  }`}
                 >
-                  <div
-                    className={`px-5 py-3 text-sm font-medium transition-all duration-300 rounded-lg flex items-center gap-2 ${
-                      location.pathname === item.path
-                        ? isScrolled
-                          ? "text-accent bg-accent/10"
-                          : "text-accent bg-white/10"
-                        : isScrolled
-                        ? "text-foreground hover:text-accent hover:bg-accent/5"
-                        : "text-white hover:text-accent hover:bg-white/5"
-                    }`}
-                  >
-                    {item.icon && <item.icon className="h-4 w-4" />}
-                    {item.label}
-                  </div>
-                  {/* Underline Animation */}
-                  <span
-                    className={`absolute bottom-0 left-1/2 h-0.5 w-0 bg-accent transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8 ${
-                      location.pathname === item.path ? "w-3/4 left-1/8" : ""
-                    }`}
-                  />
+                  {item.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className="absolute inset-0 -z-10 rounded-full bg-white/10"
+                      transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                    />
+                  )}
                 </Link>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden md:flex items-center gap-3">
             <Button
-              variant="ghost"
-              size="icon"
-              className={`${
-                isScrolled ? "text-foreground hover:text-accent" : "text-white hover:text-accent"
-              } transition-colors`}
               asChild
+              className="rounded-full bg-[#25D366] px-5 py-2 font-semibold text-white hover:bg-[#1DA851] shadow-md"
             >
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-5 w-5" />
+                <WhatsappIcon className="mr-2 h-4 w-4" />
+                Chat on WhatsApp
               </a>
             </Button>
             <Button
               asChild
-              className="bg-accent hover:bg-accent/90 text-white font-semibold px-6 shadow-lg hover:shadow-xl transition-all"
+              className="rounded-full bg-[rgb(245,215,123)] px-5 py-2 font-semibold text-[#0B141E] hover:bg-[rgb(232,200,104)]"
             >
-              <Link to="/book">Book Fitting</Link>
+              <Link to="/book">
+                <Calendar className="mr-2 h-4 w-4" />
+                Book Fitting
+              </Link>
             </Button>
           </div>
 
-          {/* Mobile Menu Button - Enhanced */}
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden z-50 p-2 rounded-lg transition-all duration-300 ${
-              isMobileMenuOpen
-                ? "bg-accent text-white"
-                : isScrolled
-                ? "text-foreground hover:bg-accent/10"
-                : "text-white hover:bg-white/10"
-            }`}
+          <button
+            className="flex items-center justify-center rounded-full border border-white/20 p-2.5 text-white hover:text-[rgb(245,215,123)] focus:outline-none focus:ring-2 focus:ring-[rgb(245,215,123)] focus:ring-offset-2 focus:ring-offset-[#0F1B2B] md:hidden"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open navigation menu"
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </motion.button>
+            <Menu className="h-6 w-6" />
+          </button>
         </div>
-      </div>
+      </motion.nav>
 
-      {/* Mobile Menu - Enhanced */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 25 }}
-            className="fixed inset-0 bg-gradient-to-br from-primary via-primary to-black z-40 lg:hidden"
+            key="mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/60"
           >
-            {/* Decorative Elements */}
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-20 right-10 w-40 h-40 bg-accent rounded-full blur-3xl" />
-              <div className="absolute bottom-20 left-10 w-60 h-60 bg-accent rounded-full blur-3xl" />
-            </div>
-
-            <div className="relative flex flex-col items-center justify-center h-full space-y-8 px-6">
-              {menuItems.map((item, index) => (
-                <motion.div
-                  key={item.path}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 + 0.2, type: "spring" }}
-                  className="w-full max-w-xs"
+            <div className="absolute inset-0" onClick={() => setIsMobileMenuOpen(false)} />
+            <motion.div
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -40, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 320, damping: 30 }}
+              className="absolute top-4 left-4 right-4 rounded-3xl bg-[#0E1B2E] p-6 shadow-2xl"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 p-1.5 ring-2 ring-white/20">
+                    <img
+                      src={logoSrc}
+                      alt="MaxJuma Tailors logo"
+                      className="h-full w-full rounded-full object-cover"
+                    />
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-lg font-semibold tracking-[0.3em] text-white">
+                      MAXJUMA
+                    </span>
+                    <span className="text-[10px] uppercase tracking-[0.4em] text-white/60">
+                      Bespoke Tailors
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="rounded-full border border-white/20 p-2 text-white/60 hover:text-[rgb(245,215,123)] focus:outline-none focus:ring-2 focus:ring-[rgb(245,215,123)]"
+                  aria-label="Close navigation menu"
                 >
-                  <Link
-                    to={item.path}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block w-full text-center py-4 px-6 text-2xl font-display transition-all duration-300 rounded-lg ${
-                      location.pathname === item.path
-                        ? "text-accent bg-white/10 border-2 border-accent"
-                        : "text-white hover:text-accent hover:bg-white/5"
-                    }`}
-                  >
-                    <div className="flex items-center justify-center gap-3">
-                      {item.icon && <item.icon className="h-6 w-6" />}
-                      {item.label}
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-              {/* Mobile WhatsApp Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="pt-8"
-              >
+              <div className="mt-6 space-y-3">
+                {menuItems.map((item) => {
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={`flex items-center justify-between rounded-2xl border px-4 py-4 text-base font-semibold transition ${
+                        isActive
+                          ? "border-[rgb(245,215,123)] bg-white/10 text-[rgb(245,215,123)]"
+                          : "border-white/10 text-white hover:border-white/30 hover:text-[rgb(245,215,123)]"
+                      }`}
+                    >
+                      {item.label}
+                      <motion.span
+                        animate={{ x: isActive ? 8 : 0 }}
+                        className="text-sm text-white/50"
+                      >
+                        →
+                      </motion.span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div className="mt-8 space-y-3">
                 <Button
                   asChild
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90 text-white font-semibold px-8 shadow-xl"
+                  className="w-full rounded-2xl bg-[#25D366] py-6 text-base font-semibold text-white hover:bg-[#1DA851]"
                 >
                   <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="mr-2 h-5 w-5" />
+                    <WhatsappIcon className="mr-2 h-5 w-5" />
                     Chat on WhatsApp
                   </a>
                 </Button>
-              </motion.div>
-            </div>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full rounded-2xl border-white/30 py-6 text-base font-semibold text-white hover:border-[rgb(245,215,123)] hover:text-[rgb(245,215,123)]"
+                >
+                  <Link to="/book">
+                    <Calendar className="mr-2 h-5 w-5" />
+                    Book a Fitting
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="mt-6 flex flex-col gap-2 text-xs uppercase tracking-[0.35em] text-white/60">
+                <span>Garden Chambers · Nairobi CBD</span>
+                <a href={`tel:${whatsappNumber}`} className="hover:text-[rgb(245,215,123)]">
+                  {whatsappNumber}
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </header>
   );
 };
 

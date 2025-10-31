@@ -101,9 +101,6 @@ const Suits = () => {
                     </div>
 
                     <div className="pt-4 border-t border-border mt-auto">
-                      <p className="text-xl font-semibold text-accent mb-3">
-                        {suit.price}
-                      </p>
                       <Button
                         className="w-full bg-primary hover:bg-primary/90"
                         asChild

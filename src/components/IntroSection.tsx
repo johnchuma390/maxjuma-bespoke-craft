@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Droplet, Recycle, Heart, Scissors, Trash2, Wind } from "lucide-react";
-import artisanImage from "@/assets/artisan-hands.jpg";
 
 const IntroSection = () => {
   const ref = useRef(null);
@@ -35,9 +34,9 @@ const IntroSection = () => {
                 transition={{ delay: 0.2 }}
                 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight"
               >
-                CUSTOM SUITS
+                BESPOKE SUITS
                 <br />
-                <span className="text-accent">A.I. TAILORED FOR YOU</span>
+                <span className="text-accent">CUT FOR YOUR STORY</span>
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -45,10 +44,9 @@ const IntroSection = () => {
                 transition={{ delay: 0.3 }}
                 className="text-lg text-muted-foreground leading-relaxed"
               >
-                We craft custom suits & tuxedos that are luxurious,
-                cost-efficient and sustainable. Hand-made in our Nairobi atelier,
-                enhanced by AI for precise fits that marry data with
-                craftsmanship.
+                We create made-to-measure suits and tuxedos that honour your personality,
+                your culture, and the moments that matter. Hand-finished in our Nairobi atelier,
+                every stitch is guided by experienced artisans who know how a suit should feel.
               </motion.p>
             </div>
 
@@ -78,7 +76,7 @@ const IntroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Image */}
+          {/* Right Column - Video */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -86,12 +84,15 @@ const IntroSection = () => {
             className="relative"
           >
             <div className="relative overflow-hidden rounded-2xl shadow-2xl aspect-square">
-              <img
-                src={artisanImage}
-                alt="Artisan hand-crafting a bespoke suit"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              <video
+                src="https://assets1.hangrr.com/v8/videos/hangrr-custom-suit-making-v5.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent pointer-events-none" />
             </div>
 
             {/* Floating Badge */}
