@@ -5,14 +5,15 @@ export const suitFallbacks = [
 ];
 
 export function resolveImageUrl(input?: string, fallback?: string) {
-  if (!input || typeof input !== "string") return fallback || suitFallbacks[0];
-
-  // Absolute remote URL
+  if (!input) return fallback || "";
   if (/^https?:\/\//i.test(input)) return input;
 
-  // Convert dev-only paths like "/src/assets/suits/xyz.jpg" -> "/images/suits/xyz.jpg"
+  // Handle dev-only paths e.g. "/src/assets/suits/a.jpg" or "src/assets/suits/a.jpg"
   const cleaned = input
-    .replace(/^@?\/?src\/assets\//i, "") // strip src/assets/
-    .replace(/^\.?\//, ""); // strip leading ./ or /
-  return `/images/${cleaned}`; // expects files in public/images/
+    .replace(/^\/?src\/assets\//i, "")
+    .replace(/^@?\/?assets\//i, "")
+    .replace(/^\.?\//, "");
+
+  // Now serve from public/images
+  return `/images/${cleaned}`;
 }

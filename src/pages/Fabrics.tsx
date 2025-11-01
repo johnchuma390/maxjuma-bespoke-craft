@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import fabricsData from "@/data/fabrics.json";
+import { resolveImageUrl } from "@/lib/images";
 
 const Fabrics = () => {
   const [fabrics, setFabrics] = useState(fabricsData);
@@ -38,7 +39,7 @@ const Fabrics = () => {
               <motion.div key={fabric.id} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}>
                 <Card className="group overflow-hidden hover:shadow-2xl transition-shadow duration-300">
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <img src={fabric.image} alt={fabric.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <img src={resolveImageUrl(fabric.image)} alt={fabric.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute top-4 right-4"><Badge className="bg-accent text-white">{fabric.category}</Badge></div>
                   </div>
                   <CardContent className="p-6 space-y-4">

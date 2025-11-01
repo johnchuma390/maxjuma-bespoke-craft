@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import suitsData from "@/data/suits.json";
-import { resolveImageUrl, suitFallbacks } from "@/lib/images";
+import { resolveImageUrl } from "@/lib/images";
 
 const Suits = () => {
   const [suits, setSuits] = useState<any[]>(suitsData as any[]);
@@ -35,54 +35,37 @@ const Suits = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {suits.map((suit, idx) => {
-              const img = resolveImageUrl(suit.image, suitFallbacks[idx % suitFallbacks.length]);
-              const alt = suit.name ? `${suit.name} bespoke suit` : "Bespoke suit";
+            {suits.map((suit, idx) => (
+              <article key={suit.id ?? idx} className="overflow-hidden rounded-3xl border border-border bg-card">
+                <div className="relative aspect-[4/5] w-full bg-muted">
+                  <img
+                    src={resolveImageUrl(suit.image)}
+                    alt={suit.name ?? "Bespoke suit"}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
 
-              return (
-                <article
-                  key={suit.id ?? idx}
-                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow hover:shadow-lg"
-                >
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
-                    <img
-                      src={img}
-                      srcSet={`${img}&w=640 640w, ${img}&w=960 960w, ${img}&w=1200 1200w`}
-                      sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                      alt={alt}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                      onError={(e) => {
-                        const fallback = suitFallbacks[(idx + 1) % suitFallbacks.length];
-                        if ((e.currentTarget as HTMLImageElement).src !== fallback) {
-                          (e.currentTarget as HTMLImageElement).src = fallback;
-                        }
-                      }}
-                      referrerPolicy="no-referrer"
-                    />
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-lg font-semibold text-primary">
+                    {suit.name ?? "Custom Suit"}
+                  </h3>
+                  {suit.description && (
+                    <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                      {suit.description}
+                    </p>
+                  )}
+
+                  {/* No price tag */}
+                  <div className="pt-4 mt-6 border-t border-border">
+                    <Button className="w-full bg-primary hover:bg-primary/90" asChild>
+                      <Link to="/book">Book Fitting</Link>
+                    </Button>
                   </div>
-
-                  <div className="flex flex-1 flex-col p-6">
-                    <h3 className="text-lg font-semibold text-primary">
-                      {suit.name ?? "Custom Suit"}
-                    </h3>
-                    {suit.description && (
-                      <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                        {suit.description}
-                      </p>
-                    )}
-
-                    {/* No price tag */}
-                    <div className="pt-4 mt-6 border-t border-border">
-                      <Button className="w-full bg-primary hover:bg-primary/90" asChild>
-                        <Link to="/book">Book Fitting</Link>
-                      </Button>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
