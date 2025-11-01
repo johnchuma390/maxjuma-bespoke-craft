@@ -1,18 +1,16 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import suitsData from "@/data/suits.json";
+import { resolveImageUrl, suitFallbacks } from "@/lib/images";
 
 const Suits = () => {
-  const [suits, setSuits] = useState(suitsData);
+  const [suits, setSuits] = useState<any[]>(suitsData as any[]);
 
   useEffect(() => {
-    const savedSuits = localStorage.getItem('maxjuma-suits');
+    const savedSuits = localStorage.getItem("maxjuma-suits");
     if (savedSuits) {
       setSuits(JSON.parse(savedSuits));
     }
@@ -21,126 +19,71 @@ const Suits = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-primary text-white">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center space-y-6"
-          >
-            <h1 className="text-5xl lg:text-7xl font-display font-bold tracking-wider">
-              BESPOKE SUITS & TUXEDOS
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-              Each piece is meticulously crafted to your exact measurements, style preferences, and lifestyle needs. Hand-cut, hand-sewn, and made to last a lifetime.
-            </p>
-          </motion.div>
+        <div className="container mx-auto px-4 text-center lg:px-8">
+          <p className="text-xs uppercase tracking-[0.45em] text-accent">Signature Collection</p>
+          <h1 className="mt-3 text-4xl font-bold md:text-6xl">Bespoke Suits</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-white/80">
+            Made-to-measure pieces tailored in Nairobi—built to your silhouette and style.
+          </p>
         </div>
       </section>
 
       {/* Suits Grid */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {suits.map((suit, index) => (
-              <motion.div
-                key={suit.id}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="group overflow-hidden hover:shadow-2xl transition-shadow duration-300 h-full flex flex-col">
-                  <div className="relative aspect-[3/4] overflow-hidden">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {suits.map((suit, idx) => {
+              const img = resolveImageUrl(suit.image, suitFallbacks[idx % suitFallbacks.length]);
+              const alt = suit.name ? `${suit.name} bespoke suit` : "Bespoke suit";
+
+              return (
+                <article
+                  key={suit.id ?? idx}
+                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow hover:shadow-lg"
+                >
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
                     <img
-                      src={suit.image}
-                      alt={suit.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      src={img}
+                      srcSet={`${img}&w=640 640w, ${img}&w=960 960w, ${img}&w=1200 1200w`}
+                      sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                      alt={alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                      onError={(e) => {
+                        const fallback = suitFallbacks[(idx + 1) % suitFallbacks.length];
+                        if ((e.currentTarget as HTMLImageElement).src !== fallback) {
+                          (e.currentTarget as HTMLImageElement).src = fallback;
+                        }
+                      }}
+                      referrerPolicy="no-referrer"
                     />
-                    <div className="absolute top-4 right-4 flex flex-col gap-2">
-                      <Badge className="bg-accent text-white">
-                        {suit.category}
-                      </Badge>
-                      <Badge variant="outline" className="bg-white/90 text-primary border-0">
-                        {suit.style}
-                      </Badge>
-                    </div>
                   </div>
-                  <CardContent className="p-6 space-y-4 flex-1 flex flex-col">
-                    <div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">
-                        {suit.name}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="text-lg font-semibold text-primary">
+                      {suit.name ?? "Custom Suit"}
+                    </h3>
+                    {suit.description && (
+                      <p className="mt-2 flex-1 text-sm text-muted-foreground">
                         {suit.description}
                       </p>
-                    </div>
+                    )}
 
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-foreground">Features:</h4>
-                      <ul className="text-sm text-muted-foreground space-y-1">
-                        {suit.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-start">
-                            <span className="text-accent mr-2">✓</span>
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-foreground">Perfect For:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {suit.occasions.map((occasion, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {occasion}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-border mt-auto">
-                      <Button
-                        className="w-full bg-primary hover:bg-primary/90"
-                        asChild
-                      >
+                    {/* No price tag */}
+                    <div className="pt-4 mt-6 border-t border-border">
+                      <Button className="w-full bg-primary hover:bg-primary/90" asChild>
                         <Link to="/book">Book Fitting</Link>
                       </Button>
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                  </div>
+                </article>
+              );
+            })}
           </div>
-
-          {/* CTA Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="mt-20 text-center space-y-6"
-          >
-            <h2 className="text-3xl font-bold text-foreground">
-              Can't Find What You're Looking For?
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Every suit is fully customizable. Book a consultation to discuss
-              your unique vision.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
-                <Link to="/book">Schedule Consultation</Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-              >
-                <Link to="/fabrics">Browse Fabrics</Link>
-              </Button>
-            </div>
-          </motion.div>
         </div>
       </section>
 
