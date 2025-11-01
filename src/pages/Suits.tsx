@@ -18,13 +18,7 @@ type Suit = {
 };
 
 const Suits = () => {
-  const [suits, setSuits] = useState<Suit[]>(suitsData as Suit[]);
-
-  // Remove old cached override so JSON shows after deploy
-  useEffect(() => {
-    localStorage.removeItem("maxjuma-suits");
-  }, []);
-
+  const suits = suitsData as Suit[]; // load directly from JSON
   return (
     <div className="min-h-screen">
       <Navigation />
