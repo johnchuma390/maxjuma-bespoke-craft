@@ -7,8 +7,8 @@
     "color": "Navy",
     "fabric": "Super 120s Wool",
     "image": "https://i.postimg.cc/pTH3t976/image.png",
-    "description": "A versatile navy suit tailored for business and occasion wear.",
-    "tags": ["Business", "Everyday", "Formal"]
+    "description": "Versatile navy tailored for business and events.",
+    "tags": ["Business", "Formal"]
   },
   {
     "id": "s-002",
@@ -18,8 +18,8 @@
     "color": "Charcoal",
     "fabric": "Wool Blend",
     "image": "https://i.postimg.cc/9Q9xFmy8/image.png",
-    "description": "Subtle texture with a clean silhouette for boardroom polish.",
-    "tags": ["Corporate", "Minimal", "Timeless"]
+    "description": "Clean silhouette with subtle texture.",
+    "tags": ["Corporate", "Minimal"]
   },
   {
     "id": "s-003",
@@ -29,8 +29,8 @@
     "color": "Midnight",
     "fabric": "Wool with Satin Lapel",
     "image": "https://i.postimg.cc/GmPk5Hkq/image.png",
-    "description": "Elegant tuxedo for black-tie celebrations and evening events.",
-    "tags": ["Black Tie", "Evening", "Occasion"]
+    "description": "Elegant choice for black‑tie evenings.",
+    "tags": ["Black Tie", "Evening"]
   },
   {
     "id": "s-004",
@@ -40,7 +40,7 @@
     "color": "Graphite",
     "fabric": "Wool Flannel",
     "image": "https://i.postimg.cc/RZXTDqfT/image.png",
-    "description": "Waistcoat included—classic structure with modern comfort.",
-    "tags": ["Heritage", "Vest", "Fall/Winter"]
+    "description": "Waistcoat included—classic structure.",
+    "tags": ["Heritage", "Winter"]
   }
 ]

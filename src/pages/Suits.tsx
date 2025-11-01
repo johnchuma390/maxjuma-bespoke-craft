@@ -29,7 +29,7 @@ const Suits = () => {
           <p className="text-xs uppercase tracking-[0.45em] text-accent">Signature Collection</p>
           <h1 className="mt-3 text-4xl font-bold md:text-6xl">Bespoke Suits</h1>
           <p className="mx-auto mt-4 max-w-2xl text-white/80">
-            Made-to-measure pieces tailored in Nairobi—built to your silhouette and style.
+            Tailored in Nairobi—built to your silhouette and style.
           </p>
         </div>
       </section>
@@ -41,7 +41,7 @@ const Suits = () => {
             {suits.map((suit) => (
               <article
                 key={suit.id}
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow hover:shadow-lg"
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow"
               >
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
                   <img
@@ -59,7 +59,7 @@ const Suits = () => {
                     {suit.piece} • {suit.fit} • {suit.fabric}
                   </p>
                   <p className="mt-3 flex-1 text-sm text-muted-foreground">{suit.description}</p>
-                  {suit.tags && (
+                  {suit.tags?.length ? (
                     <div className="mt-4 flex flex-wrap gap-2">
                       {suit.tags.map((t) => (
                         <span key={t} className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-accent">
@@ -67,7 +67,7 @@ const Suits = () => {
                         </span>
                       ))}
                     </div>
-                  )}
+                  ) : null}
                   <div className="pt-4 mt-6 border-t border-border">
                     <Button className="w-full bg-primary hover:bg-primary/90" asChild>
                       <Link to="/book">Book Fitting</Link>
