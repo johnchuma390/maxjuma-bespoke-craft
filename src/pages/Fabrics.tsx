@@ -20,9 +20,9 @@ type Fabric = {
 const Fabrics = () => {
   const [fabrics, setFabrics] = useState<Fabric[]>(fabricsData as Fabric[]);
 
+  // Remove old cached override so JSON shows after deploy
   useEffect(() => {
-    const saved = localStorage.getItem("maxjuma-fabrics");
-    if (saved) setFabrics(JSON.parse(saved));
+    localStorage.removeItem("maxjuma-fabrics");
   }, []);
 
   return (

@@ -20,9 +20,9 @@ type Suit = {
 const Suits = () => {
   const [suits, setSuits] = useState<Suit[]>(suitsData as Suit[]);
 
+  // Remove old cached override so JSON shows after deploy
   useEffect(() => {
-    const saved = localStorage.getItem("maxjuma-suits");
-    if (saved) setSuits(JSON.parse(saved));
+    localStorage.removeItem("maxjuma-suits");
   }, []);
 
   return (
