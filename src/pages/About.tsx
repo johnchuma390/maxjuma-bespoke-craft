@@ -1,209 +1,153 @@
-import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Award, Clock, Heart, Users, Sparkles, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+
+const aboutHeroImg = "https://i.postimg.cc/C5rF2GhL/image.png";   // hero image
+const aboutDetailImg = "https://i.postimg.cc/FzNdvVXk/image.png"; // secondary image
 
 const About = () => {
-  const stats = [
-    { label: "Years Experience", value: "10+", icon: Award },
-    { label: "Happy Clients", value: "5000+", icon: Users },
-    { label: "Custom Suits Made", value: "8000+", icon: Sparkles },
-    { label: "Customer Satisfaction", value: "98%", icon: TrendingUp },
-  ];
-
-  const values = [
-    {
-      icon: Heart,
-      title: "Passion for Craft",
-      description: "Every stitch, every cut, every detail is executed with unwavering dedication to the art of bespoke tailoring.",
-    },
-    {
-      icon: Award,
-      title: "Uncompromising Quality",
-      description: "We source only the finest fabrics from prestigious mills around the world and employ master tailors with decades of experience.",
-    },
-    {
-      icon: Users,
-      title: "Client-Centered Approach",
-      description: "Your vision, preferences, and satisfaction are at the heart of everything we do. We listen, we understand, we deliver.",
-    },
-    {
-      icon: Clock,
-      title: "Timeless Elegance",
-      description: "We create suits that transcend trends—pieces that will make you look and feel exceptional for years to come.",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground">
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="relative h-[60vh] lg:h-[70vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-black" />
-        <div className="absolute inset-0 bg-[url('/src/assets/artisan-hands.jpg')] bg-cover bg-center opacity-20" />
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 text-center px-4"
-        >
-          <h1 className="text-5xl lg:text-7xl font-display font-bold text-white mb-6">
-            About MaxJuma
-          </h1>
-          <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto font-light">
-            Crafting Excellence in Bespoke Tailoring Since 2014
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Story Section */}
-      <section className="py-20 lg:py-32 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6 text-foreground">
-                Our Story
-              </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Located opposite the iconic Jeevanjee Gardens in the heart of Nairobi, MaxJuma Bespoke Tailors has been redefining luxury menswear since 2014. What began as a small atelier with a passion for perfect fits has grown into Kenya's premier destination for custom suits and formal wear.
-                </p>
-                <p>
-                  We believe that every man deserves a suit that not only fits perfectly but tells his unique story. Our master tailors combine traditional craftsmanship with cutting-edge AI-assisted measurements to deliver unparalleled precision and style.
-                </p>
-                <p>
-                  From weddings to boardrooms, from cultural celebrations to red carpet events, MaxJuma has dressed Kenya's finest. Our commitment to excellence, sustainable practices, and personalized service has made us the trusted choice for discerning gentlemen across East Africa.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="aspect-[3/4] bg-gradient-to-br from-accent/20 to-primary/20 rounded-lg overflow-hidden">
-                <img
-                  src="/src/assets/artisan-hands.jpg"
-                  alt="Master Tailor at Work"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-accent text-white p-8 rounded-lg shadow-xl">
-                <p className="text-4xl font-bold">10+</p>
-                <p className="text-sm">Years of Excellence</p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-primary text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <stat.icon className="h-12 w-12 mx-auto mb-4 text-accent" />
-                <p className="text-4xl lg:text-5xl font-bold mb-2">{stat.value}</p>
-                <p className="text-white/80 text-sm lg:text-base">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-20 lg:py-32 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6 text-foreground">
-              Our Values
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide every decision, every stitch, and every client interaction
+      {/* Hero */}
+      <section className="relative h-[60vh] w-full overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${aboutHeroImg})` }}
+          aria-label="MaxJuma Atelier"
+          role="img"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 flex h-full items-center justify-center">
+          <div className="container mx-auto px-4 text-center lg:px-8">
+            <p className="text-xs uppercase tracking-[0.45em] text-accent">Our Story</p>
+            <h1 className="mt-3 text-4xl font-bold text-white md:text-6xl">MaxJuma Atelier</h1>
+            <p className="mx-auto mt-4 max-w-2xl text-white/85">
+              Bespoke tailoring crafted with precision and care in Nairobi.
             </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-card p-8 rounded-lg border border-border hover:border-accent transition-colors group"
-              >
-                <value.icon className="h-12 w-12 text-accent mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-2xl font-display font-bold mb-4 text-foreground">
-                  {value.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-gradient-to-br from-primary to-black text-white">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6">
-              Ready to Experience MaxJuma?
-            </h2>
-            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Visit our atelier opposite Jeevanjee Gardens or book a consultation today
+      {/* Content Part 1: Craft Philosophy */}
+      <section className="py-14">
+        <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-12 lg:px-8">
+          <div className="lg:col-span-7">
+            <h2 className="text-2xl font-semibold text-primary">Craft Philosophy</h2>
+
+            <p className="mt-4 text-muted-foreground">
+              Located opposite the iconic Jeevanjee Gardens in the heart of Nairobi, MaxJuma Bespoke
+              Tailors has been redefining luxury menswear since 2014. What began as a small atelier with
+              a passion for perfect fits has grown into Kenya&apos;s premier destination for custom suits
+              and formal wear.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.a
-                href="/book"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-lg shadow-xl inline-block"
+
+            <p className="mt-4 text-muted-foreground">
+              We believe that every man deserves a suit that not only fits perfectly but tells his unique
+              story. Our master tailors combine traditional craftsmanship with cutting-edge AI-assisted
+              measurements to deliver unparalleled precision and style.
+            </p>
+
+            <p className="mt-4 text-muted-foreground">
+              From weddings to boardrooms, from cultural celebrations to red carpet events, MaxJuma has
+              dressed Kenya&apos;s finest. Our commitment to excellence, sustainable practices, and
+              personalized service has made us the trusted choice for discerning gentlemen across East Africa.
+            </p>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
+              <img
+                src={aboutDetailImg}
+                alt="Atelier detail"
+                className="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+              />
+
+              {/* Overlay badge exactly like the design */}
+              <div
+                className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-[280px] h-[140px] sm:w-[320px] sm:h-[160px] rounded-2xl bg-[#C6A24D] text-white shadow-[0_24px_60px_-12px_rgba(0,0,0,0.45)]"
+                aria-label="10+ Years of Excellence"
               >
-                Book Your Fitting
-              </motion.a>
-              <motion.a
-                href="/lookbook"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-lg border-2 border-white/30 inline-block"
-              >
-                View Lookbook
-              </motion.a>
+                <div className="flex h-full w-full flex-col items-start justify-center px-6 sm:px-8 text-left">
+                  <div className="text-4xl sm:text-5xl font-bold leading-none">10+</div>
+                  <div className="mt-2 sm:mt-3 text-sm sm:text-base">Years of Excellence</div>
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Content Part 2: Our Process */}
+      <section className="py-14 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <h2 className="text-2xl font-semibold text-primary text-center">How We Work</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { step: "01", title: "Consult", text: "Discuss lifestyle, occasion, and personal style." },
+              { step: "02", title: "Measure", text: "Precise measurements and posture assessment." },
+              { step: "03", title: "Cut & Fit", text: "Pattern draft, fabric cut, and guided fittings." },
+              { step: "04", title: "Finish", text: "Hand detailing, pressing, and final delivery." }
+            ].map((s) => (
+              <div key={s.step} className="rounded-2xl border border-border bg-card p-6">
+                <div className="text-accent text-sm font-semibold tracking-[0.3em]">{s.step}</div>
+                <h3 className="mt-2 text-lg font-semibold text-primary">{s.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Content Part 3: Fabrics & Sustainability */}
+      <section className="py-14">
+        <div className="container mx-auto px-4 lg:px-8">
+          <h2 className="text-2xl font-semibold text-primary">Fabrics & Sustainability</h2>
+          <p className="mt-4 max-w-3xl text-muted-foreground">
+            We source breathable blends, fine wools, and statement weaves suited to Kenya’s climate.
+            We prioritise lasting quality, careful waste reduction, and repairs that extend garment life.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {["Breathable", "Durable", "Repair-Friendly", "Climate-Suited", "Statement Options"].map((f) => (
+              <span
+                key={f}
+                className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-accent"
+              >
+                {f}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Content Part 4: Visit the Studio */}
+      <section className="py-14 bg-muted/30">
+        <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-12 lg:px-8">
+          <div className="order-2 lg:order-1 lg:col-span-7">
+            <h2 className="text-2xl font-semibold text-primary">Visit the Studio</h2>
+            <p className="mt-4 text-muted-foreground">
+              Find us at Garden Chambers, Nairobi CBD. Book a private consultation or fitting—onsite
+              or virtual—to begin your commission.
+            </p>
+            <div className="mt-6">
+              <Button className="bg-primary hover:bg-primary/90" asChild>
+                <Link to="/book">Book a Fitting</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="order-1 lg:order-2 lg:col-span-5">
+            <div
+              className="h-full min-h-[260px] w-full overflow-hidden rounded-2xl border border-border bg-cover bg-center"
+              style={{ backgroundImage: `url(${aboutHeroImg})` }}
+              aria-label="Studio preview"
+              role="img"
+            />
+          </div>
         </div>
       </section>
 
