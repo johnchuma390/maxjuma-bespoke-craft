@@ -25,6 +25,13 @@ const Fabrics = () => {
     localStorage.removeItem("maxjuma-fabrics");
   }, []);
 
+  // Fallbacks in case external links fail
+  const fabricFallbacks = [
+    "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=1200&q=80"
+  ];
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -42,7 +49,7 @@ const Fabrics = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {fabrics.map((fabric) => (
+            {fabrics.map((fabric, idx) => (
               <article key={fabric.id} className="flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow">
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                   <img
@@ -52,6 +59,15 @@ const Fabrics = () => {
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"
+                    crossOrigin="anonymous"
+                    onError={(e) => {
+                      const fallback = fabricFallbacks[idx % fabricFallbacks.length];
+                      if (e.currentTarget.src !== fallback) {
+                        e.currentTarget.src = fallback;
+                      }
+                    }}
+                    srcSet={`${fabric.image} 1x`}
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
                   />
                 </div>
 
