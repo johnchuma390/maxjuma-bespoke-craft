@@ -4,16 +4,25 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import suitsData from "@/data/suits.json";
-import { resolveImageUrl } from "@/lib/images";
+
+type Suit = {
+  id: string;
+  name: string;
+  fit: string;
+  piece: string;
+  color: string;
+  fabric: string;
+  image: string;
+  description: string;
+  tags?: string[];
+};
 
 const Suits = () => {
-  const [suits, setSuits] = useState<any[]>(suitsData as any[]);
+  const [suits, setSuits] = useState<Suit[]>(suitsData as Suit[]);
 
   useEffect(() => {
-    const savedSuits = localStorage.getItem("maxjuma-suits");
-    if (savedSuits) {
-      setSuits(JSON.parse(savedSuits));
-    }
+    const saved = localStorage.getItem("maxjuma-suits");
+    if (saved) setSuits(JSON.parse(saved));
   }, []);
 
   return (
@@ -35,29 +44,36 @@ const Suits = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {suits.map((suit, idx) => (
-              <article key={suit.id ?? idx} className="overflow-hidden rounded-3xl border border-border bg-card">
-                <div className="relative aspect-[4/5] w-full bg-muted">
+            {suits.map((suit) => (
+              <article
+                key={suit.id}
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow hover:shadow-lg"
+              >
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
                   <img
-                    src={resolveImageUrl(suit.image)}
-                    alt={suit.name ?? "Bespoke suit"}
-                    className="h-full w-full object-cover"
+                    src={suit.image}
+                    alt={`${suit.name} bespoke suit`}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                     loading="lazy"
                     decoding="async"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
-
                 <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-lg font-semibold text-primary">
-                    {suit.name ?? "Custom Suit"}
-                  </h3>
-                  {suit.description && (
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                      {suit.description}
-                    </p>
+                  <h3 className="text-lg font-semibold text-primary">{suit.name}</h3>
+                  <p className="mt-1 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                    {suit.piece} • {suit.fit} • {suit.fabric}
+                  </p>
+                  <p className="mt-3 flex-1 text-sm text-muted-foreground">{suit.description}</p>
+                  {suit.tags && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {suit.tags.map((t) => (
+                        <span key={t} className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-accent">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   )}
-
-                  {/* No price tag */}
                   <div className="pt-4 mt-6 border-t border-border">
                     <Button className="w-full bg-primary hover:bg-primary/90" asChild>
                       <Link to="/book">Book Fitting</Link>
